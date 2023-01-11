@@ -1,0 +1,29 @@
+:root {
+    --grid-gutter-x: 1.6rem;
+}
+
+.layout-with-centered-content {
+    display: grid;
+    grid-template-columns: auto 100% auto;
+    grid-template-rows: auto;
+    grid-template-areas: "left main right";
+    margin: 0 56px 0 56px;
+}
+
+.main-container {
+    position: relative;
+    padding-right: var(--grid-gutter-x);
+    padding-left: var(--grid-gutter-x);
+}
+
+.main-container {
+    grid-column: main;
+}
+
+.mb-40 {
+    margin-bottom: var(--space-40);
+}
+
+.mb-72 {
+    margin-bottom: var(--space-72);
+}
