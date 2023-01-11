@@ -49,6 +49,25 @@ class GroupController extends Controller
         return $groupNumber;
     }
 
+    public function createGroupUser(int $groupId, int $userId)
+    {
+        return GroupUser::create([
+
+            "group_id" => $groupId,
+            "user_id" => $userId,
+        ]);
+    }
+
+    public function getAllGroups(int $userId)
+    {
+        $allGroupsId = GroupUser::select('group_id')->where('user_id', $userId)->get();
+        $formatAllGroupsId = [];
+        foreach ($allGroupsId as $key => $value) {
+            $formatAllGroupsId[]= $value["group_id"];
+        }
+        return Group::whereIn('id', $formatAllGroupsId)->get();
+    }
+
     public function checkPassword()
     {
         $groupPassword = $this->generateGroupPassword();
@@ -66,14 +85,5 @@ class GroupController extends Controller
             }
         }
         return $groupPassword;
-    }
-
-    public function createGroupUser(int $groupId, int $userId)
-    {
-        return GroupUser::create([
-
-            "group_id" => $groupId,
-            "user_id" => $userId,
-        ]);
     }
 }

@@ -23,6 +23,7 @@ Route::post("/user/logIn", [UserController::class, "logIn"]);
 
 // Group 
 Route::post("/user/{id}/group", [GroupController::class, "create"]);
+Route::get("/user/{id}/groups", [GroupController::class, "getAllGroups"]);
 
 
 
