@@ -1,0 +1,58 @@
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--space-32);
+}
+
+.formButton {
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--space-24) ;
+}
+
+.loginForm button {
+    padding: var(--space-8);
+    border: none;
+    border-radius: 4px;
+}
+
+.loginButton {
+    color: var(--color-ink-white);
+    background-color: var(--color-blue-primary);
+    
+}
+
+.signUpButton {
+    background-color: var(--color-grey-background);
+}
+
+.loginLabel {
+    font-size: var(--font-size-xxxs);
+    text-transform: uppercase;
+    font-weight: var(--font-);
+}
+
+.loginForm input {
+    padding: var(--space-8);
+    border: 1px solid #dde2e5;
+    border-radius: 4px;
+}
+
+input::placeholder {
+    color: #dde2e5;
+}
+
+.loginCard {
+    position: relative;
+    width: 410px;
+    background-color: var(--color-grey-background);
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.12);
+    padding: var(--space-16);
+    margin-top: 100px;
+    border-radius: 4px ;
+}
+
+.loginLogo{
+    display: flex;
+    justify-content: center;
+}

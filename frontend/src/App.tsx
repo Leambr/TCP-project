@@ -1,27 +1,32 @@
-import "./App.css";
-import "./design-system/styles/grid.css";
-import "./design-system/styles/layout.css";
-import { Routes, Route } from "react-router-dom";
+import './App.css';
+import './design-system/styles/grid.css';
+import './design-system/styles/layout.css';
+import { Routes, Route } from 'react-router-dom';
+import Login from './component/page/auth/login/Login';
+import Signup from './component/page/auth/signup/Signup';
+import Landing from './component/page/landing/Landing';
+import Spending from './component/page/spending/Spending';
 
 function App() {
     return (
-        <Routes>
-            <Route path="/login" element={} />
-            <Route path="/signup" element={} />
-            <Route path="/landing" element={} />
-            <Route path="/spending" element={} />
-        </Routes>
-        // <div className="layout-with-centered-content">
-        /* <section className="main-container">
-                <div className="col-12 mb-40">
-                    <h1 className="title">Hello</h1>
+        <div className="layout-with-centered-content">
+            <section className="main-container">
+                <div className="row">
+                    <div className="col-4"></div>
+                    <Routes>
+                        <Route path="/" element={<Login />} />
+                        <Route path="/signup" element={<Signup />} />
+                    </Routes>
                 </div>
-                <div className="col-6 mb-40">
-                    <h1>Hello</h1>
-                    <h1>Hello</h1>
-                </div>
-            </section> */
-        // </div>
+            </section>
+
+            <section className="main-container">
+                <Routes>
+                    <Route path="/landing" element={<Landing />} />
+                    <Route path="/spending" element={<Spending />} />
+                </Routes>
+            </section>
+        </div>
 
         // Exemple d'utilisation de la grid et du layout pour les composants
         // <div className="layout-with-centered-content">

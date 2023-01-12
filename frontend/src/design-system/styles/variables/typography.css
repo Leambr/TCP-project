@@ -3,10 +3,12 @@
     --font-family-default: var(--font-family-poppins);
 
     --font-weight-normal: 400;
-    --font-weight-mediuml: 500;
+    --font-weight-medium: 500;
     --font-weight-semi-bold: 600;
     --font-weight-bold: 700;
 
+    --font-size-xxxs: 0.5em;
+    --font-size-xxs: 0.75em;
     --font-size-xs: 1.4rem;
     --font-size-body: 1.6rem;
     --font-size-m: 2.4rem;
