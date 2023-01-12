@@ -32,21 +32,30 @@ class GroupController extends Controller
         return $newGroup;
     }
 
-    public function generateGroupPassword()
+    public function join(Request $request)
     {
-        $groupNumber = '';
-        for ($i=0; $i < 6; $i++) { 
-            
-            $number = rand(1, 9);
-            if($number ==  0 && $i == 0)
-            {
-                $number = rand(1, 9);
-                $i -= 1;
-            }
-            $groupNumber .= strval($number);
+        $joinData = $request->validate([
+
+            'id' => ["required", "string"],
+            'password' => ["required", "string"]
+        ]);
+        $group = Group::where('password', $joinData['password'])->first();
+
+        if(!isset($group))
+        {
+            return "Pas de groupe";
         }
-        
-        return $groupNumber;
+
+        $userInGroup = GroupUser::where('user_id', $joinData["id"])->where('group_id', $group["id"])->first();
+
+        if($userInGroup)
+        {
+            return "Déja rejoins";
+        }
+
+        $groupUser = $this->createGroupUser($group["id"], $joinData["id"]);
+
+        return $groupUser;
     }
 
     public function createGroupUser(int $groupId, int $userId)
@@ -66,6 +75,30 @@ class GroupController extends Controller
             $formatAllGroupsId[]= $value["group_id"];
         }
         return Group::whereIn('id', $formatAllGroupsId)->get();
+    }
+
+    public function getAllUsers(int $groupId)
+    {
+        return GroupUser::select('user_id')->where('group_id', $groupId)->get();
+    }
+
+    // Utils
+
+    public function generateGroupPassword()
+    {
+        $groupNumber = '';
+        for ($i=0; $i < 6; $i++) { 
+            
+            $number = rand(1, 9);
+            if($number ==  0 && $i == 0)
+            {
+                $number = rand(1, 9);
+                $i -= 1;
+            }
+            $groupNumber .= strval($number);
+        }
+        
+        return $groupNumber;
     }
 
     public function checkPassword()
