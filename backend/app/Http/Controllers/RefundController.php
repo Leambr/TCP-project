@@ -53,4 +53,9 @@ class RefundController extends Controller
 
         return $refundsNotConfirmed;
     }
+
+    public function getAllRefunds(int $spendingId)
+    {
+        return Refund::where('spending_id', $spendingId)->get();
+    }
 }

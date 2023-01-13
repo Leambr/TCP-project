@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 // User
 Route::post("/user/signUp", [UserController::class, "signUp"]);
 Route::post("/user/logIn", [UserController::class, "logIn"]);
@@ -32,6 +31,7 @@ Route::get("/group/{id}/spendings", [SpendingController::class, "getAllSpendings
 
 // Spending
 Route::patch("/spending/refund/{id}", [RefundController::class, "refundComfirmed"]);
+Route::get("/spending/{id}/refunds", [RefundController::class, "getAllRefunds"]);
 
 
 
