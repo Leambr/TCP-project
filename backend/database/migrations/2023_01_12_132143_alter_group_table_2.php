@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('user', function (Blueprint $table) {
-            $table->uuid('id')->change();
-            $table->string("name");
-            $table->string('email')->unique();
-            $table->string('password');
+        Schema::table('group', function (Blueprint $table) {
+            
+            $table->string('password')->change();
         });
     }
 
