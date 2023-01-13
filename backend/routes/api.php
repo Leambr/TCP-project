@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\SpendingController;
+use App\Http\Controllers\RefundController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,9 @@ Route::post("user/group", [GroupController::class, "join"]);
 // Group 
 Route::post("/group/{id}/spending", [SpendingController::class, "create"]);
 Route::get("/group/{id}/spendings", [SpendingController::class, "getAllSpendings"]);
+
+// Spending
+Route::patch("/spending/refund/{id}", [RefundController::class, "refundComfirmed"]);
 
 
 

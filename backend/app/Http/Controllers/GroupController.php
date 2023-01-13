@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
+    //JWT
     public function create(Request $request, int $userId)
     {
         $groupData = $request->validate([
@@ -32,6 +33,7 @@ class GroupController extends Controller
         return $newGroup;
     }
 
+    //JWT
     public function join(Request $request)
     {
         $joinData = $request->validate([
@@ -75,6 +77,7 @@ class GroupController extends Controller
             $formatAllGroupsId[]= $value["group_id"];
         }
         return Group::whereIn('id', $formatAllGroupsId)->get();
+        // JWT
     }
 
     public function getAllUsers(int $groupId)

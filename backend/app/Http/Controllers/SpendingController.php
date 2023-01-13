@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class SpendingController extends Controller
 {
+    //JWT
     public function create(Request $request, int $groupId)
     {
         $spendingData = $request->validate([
@@ -35,7 +36,11 @@ class SpendingController extends Controller
 
     public function getAllSpendings(int $groupId)
     {
-        return Spending::where('group_id', $groupId)->get();
-        // TODO filtrer par refunded false ordonné par date
+        return Spending::where('group_id', $groupId)->where('refunded', false)->get();
+    }
+
+    public function RefundSpending(int $spendingId)
+    {
+        Spending::where('id', $spendingId)->update(['refunded' => true]);
     }
 }

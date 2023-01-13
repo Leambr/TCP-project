@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    // JWT
     public function signIn(Request $request)
     {
         $userData = $request->validate([
@@ -26,6 +27,7 @@ class UserController extends Controller
         return response($newUser, 201);
     }
 
+    //JWT
     public function logIn(Request $request)
     {
         $userData = $request->validate([
