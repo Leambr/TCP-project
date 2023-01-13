@@ -13,17 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('group_user', function (Blueprint $table) {
+        Schema::create('spending', function (Blueprint $table) {
 
             $table->id();
             $table->timestamps();
-            
+            $table->string('name');
+            $table->unsignedBigInteger('amount');
+            $table->unsignedBigInteger('paid_by_id');
+            $table->string('paid_by');
             $table->unsignedBigInteger('group_id');
-            $table->unsignedBigInteger('user_id');
+            $table->boolean('refunded')->default(false);
 
             $table->foreign('group_id')->references('id')->on('group');
-            $table->foreign('user_id')->references('id')->on('user');
-        });
+        }); 
     }
 
     /**
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('group_user');
+        Schema::dropIfExists('spending');
     }
 };

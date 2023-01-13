@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // User
-Route::post("/user/signIn", [UserController::class, "signIn"]);
+Route::post("/user/signUp", [UserController::class, "signUp"]);
 Route::post("/user/logIn", [UserController::class, "logIn"]);
 Route::post("/user/{id}/group", [GroupController::class, "create"]);
 Route::get("/user/{id}/groups", [GroupController::class, "getAllGroups"]);

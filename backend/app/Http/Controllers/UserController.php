@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     // JWT
-    public function signIn(Request $request)
+    public function signUp(Request $request)
     {
         $userData = $request->validate([
             "name" => ["required", "string"],
