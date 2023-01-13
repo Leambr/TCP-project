@@ -1,0 +1,214 @@
+.spendingPage{
+    margin :var(--space-32);
+}
+.spendingGroupTitle h2{
+    font-weight: var(--font-weight-thin);
+    margin-bottom: var(--space-32);
+}
+
+.spendingAndAmount{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.totalAmount, .totalSpending{
+    margin: 0 var(--space-16) var(--space-16)  var(--space-16);
+}
+.totalSpendingContentCard, .totalAmountContentCard{
+    padding:var(--space-8) var(--space-32) var(--space-8) var(--space-32);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.totalSpendingContentCard p, .totalAmountContentCard p{
+    font-weight: var(--font-weight-thin);
+    font-size: var(--font-size-xxs);
+    color: var(--color-grey-tertiary);
+}
+
+.totalSpendingContentCard span, .totalAmountContentCard span{
+    margin-top: var(--space-16);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-m);
+    color: var(--color-ink-primary);
+}
+
+.spendingPageContent{
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+   
+}
+
+.allSpendingData button, .spendingData button{
+
+    background-color: transparent;
+    display: flex;
+    justify-content: start;
+    border: none;
+    border-radius: 4px;
+}
+
+.allSpendingDataSection{
+    max-height: 600px;
+    overflow: auto;
+    margin-top: var(--space-8);
+}
+.allSpendingData{
+    margin-right: var(--space-8);
+   
+
+}
+
+.allSpendingData button {
+    font-size: var(--font-size-xxs);
+}
+
+.spendingData{
+    margin-left: var(--space-8);
+    padding-left: var(--space-8);
+    /* border-left: solid 2px var(--color-grey-secondary); */
+}
+
+.allSpendingTitle{
+    margin: 0 var(--space-24) 0 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+
+.allSpendingTitle h3{
+    font-weight: var(--font-weight-thin);
+    font-size: var(--font-size-body);
+    margin-right: var(--space-8);
+}
+.allSpendingTitle button{
+    margin-left:var(--space-8) ;
+    display: flex;
+    justify-content: end;
+    
+
+}
+.spendingTaskHeader{
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   padding: var(--space-8);
+   /* margin: var(--space-12) 0 var(--space-12) 0; */
+}
+.spendingTaskHeader h3{
+    font-weight: var(--font-weight-thin);
+}
+.spendingTaskHeader p{
+    display: flex;
+    justify-content: end;
+    font-weight: var(--font-weight-thin);
+    font-size: var(--font-size-xxs);
+}
+
+
+.taskSection{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+
+}
+.spentCardTask{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    font-weight: var(--font-weight-thin);
+    font-size: var(--font-size-xxs);
+
+}
+.spentCardTask .confirmedTask{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+}
+
+
+.spentCardTask .from{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+}
+
+
+.spentCardTask .to{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+}
+
+
+.spentCardTask .amount{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+}
+
+.spentCardTask .viewTaskButton{
+    background-color:var(--color-blue-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color : var(--color-ink-white)
+}
+
+.spentCardTask .arrow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.modalForm input, .modalForm select {
+    border: 1px solid #dde2e5;
+    border-radius: 4px;
+    padding: var(--space-8) var(--space-16);
+    outline: none;
+    font-size: var(--font-size-xs);
+    margin-top: var(--space-16);
+}
+
+.modalLogoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-8);
+}
+
+.modalLogoContainer h4 {
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-l);
+}
+
+.modalForm button {
+    background: var(--color-blue-primary);
+    border-radius: 4px;
+    color: var(--color-ink-white);
+    padding: var(--space-8) 0;
+    width: 100%;
+    border: none;
+    font-size: var(--font-size-xxs);
+    margin-top: var(--space-24);
+}
+
+.modalForm button:hover {
+    background-color: var(--color-blue-secondary);
+}
+
+.modalFormContainer {
+    margin-top: var(--space-40);
+}

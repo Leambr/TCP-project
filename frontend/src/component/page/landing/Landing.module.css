@@ -1,0 +1,85 @@
+.landingTitle {
+    padding-top: var(--space-40);
+    padding-bottom: var(--space-40);
+}
+
+.groupName {
+    text-align: center;
+    font-size: var(--font-size-xs);
+}
+
+.groupCardContainer {
+    border-radius: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-40);
+}
+
+.addGroupCard {
+    background-color: var(--color-grey-background);
+    border-radius: 4px;
+    height: 212.5px;
+    width: 255px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed var(--color-grey-primary);
+}
+
+.modalForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalForm label {
+    margin-top: var(--space-40);
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-normal);
+}
+
+.modalForm input {
+    border: 1px solid #dde2e5;
+    border-radius: 4px;
+    padding: var(--space-8) var(--space-16);
+    outline: none;
+    font-size: var(--font-size-xs);
+    margin-top: var(--space-32);
+}
+
+.modalForm button {
+    background: var(--color-blue-primary);
+    border-radius: 4px;
+    color: var(--color-ink-white);
+    padding: var(--space-8) 0;
+    width: 100%;
+    border: none;
+    font-size: var(--font-size-xxs);
+    margin-top: var(--space-24);
+    margin-bottom: var(--space-40);
+}
+
+.modalForm button:hover {
+    background-color: var(--color-blue-secondary);
+}
+
+.modalFormContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-32);
+    margin-top: var(--space-40);
+}
+
+.modalLogoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-8);
+}
+
+.modalLogo {
+    width: 111.15px;
+    height: 30px;
+}

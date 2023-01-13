@@ -2,6 +2,7 @@
     --font-family-poppins: Poppins;
     --font-family-default: var(--font-family-poppins);
 
+    --font-weight-thin: 100;
     --font-weight-normal: 400;
     --font-weight-medium: 500;
     --font-weight-semi-bold: 600;

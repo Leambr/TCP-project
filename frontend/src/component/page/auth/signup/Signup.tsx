@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import CardWrapper from '../../../../design-system/component/CardWrapper/CardWrapper';
 import style from './../Auth.module.css';
-import logo from '../../../../logo.svg';
+import logo from '../../../../design-system/icon/logo.svg';
 import { useNavigate } from 'react-router-dom';
 
 export default function Login() {

@@ -16,6 +16,10 @@
     border-radius: 4px;
 }
 
+.loginForm h4{
+    font-weight: var(--font-weight-normal) ;
+}
+
 .loginButton {
     color: var(--color-ink-white);
     background-color: var(--color-blue-primary);
