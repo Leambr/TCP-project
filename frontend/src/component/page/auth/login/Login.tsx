@@ -1,39 +1,37 @@
 import { useState, useEffect } from 'react';
-import cx from 'classnames';
-import CardWrapper from '../../../../design-system/component/CardWrapper/CardWrapper';
 import style from './../Auth.module.css';
 import logo from '../../../../design-system/icon/logo.svg';
 import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
-    const [user, setUser] = useState('');
-    const [username, setUsername] = useState('');
+ 
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    console.log(password);
-    console.log(username);
 
-    // const verifyAuth = async (userName: string, password: string) => {
-    //     await fetch('url', {
-    //         method: 'POST',
-    //         body: JSON.stringify({
-    //             user: userName,
-    //             password: password,
-    //             userId: Math.random().toString(36).slice(2),
-    //         }),
-    //         headers: {
-    //             'Content-type': 'application/json; charset=UTF-8',
-    //         },
-    //     })
-    //         .then((response) => response.json())
-    //         .then((data) => {
-    //             setUser((user: any) => [data, ...user]);
-    //             setUsername('');
-    //             setPassword('');
-    //         })
-    //         .catch((err) => {
-    //             console.log(err.message);
-    //         });
-    // };
+    const  onHandleLogin = async (e: any) =>
+    {
+        e.preventDefault();
+        
+        await fetch('http://localhost/api/user/logIn', {
+            method: 'POST',
+            body: JSON.stringify({
+                email: email,
+                password: password
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                localStorage.setItem("user", JSON.stringify(data));
+                navigate('/landing'); 
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+
+    };
 
     // Introdution de useNavigate
     const navigate = useNavigate();
@@ -50,17 +48,17 @@ export default function Login() {
                 ></img>
             </div>
 
-            <form className={style.loginForm} action="">
+            <form className={style.loginForm} onSubmit={onHandleLogin}>
                 <div>
                     <h4>Login</h4>
                 </div>
-                <label className={style.loginLabel} htmlFor="userName">
-                    Username
+                <label className={style.loginLabel} htmlFor="email">
+                    email
                 </label>
                 <input
-                    type="text"
-                    onChange={(event) => setUsername(event.target.value)}
-                    placeholder="Username"
+                    type="email"
+                    onChange={(event) => setEmail(event.target.value)}
+                    placeholder="email"
                 />
                 <label className={style.loginLabel} htmlFor="password">
                     Password

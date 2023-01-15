@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import logo from '../../../design-system/icon/logo.svg';
 import logout from '../../../design-system/icon/logout.svg';
 
-export default function Navbar() {
+export default function Navbar({username}: any) {
     const navigate = useNavigate();
 
     return (
@@ -15,7 +15,7 @@ export default function Navbar() {
                 </button>
 
                 <div className={style.headerRight}>
-                    <p className={style.username}>username</p> {/* change with api*/}
+                    <p className={style.username}>{username}</p> {/* change with api*/}
                     <span className={style.pipe}></span>
                     <button className={style.logout}>
                         <img src={logout} />

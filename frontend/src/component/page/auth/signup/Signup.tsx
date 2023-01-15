@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import CardWrapper from '../../../../design-system/component/CardWrapper/CardWrapper';
 import style from './../Auth.module.css';
 import logo from '../../../../design-system/icon/logo.svg';
 import { useNavigate } from 'react-router-dom';
 
-export default function Login() {
+export default function SignUp() {
     // Introdution de useNavigate
     const navigate = useNavigate();
     // naviguer vers la Signup page
@@ -13,9 +12,35 @@ export default function Login() {
     // };
 
     const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    console.log(password);
-    console.log(username);
+
+    const  onHandleSignUp = async (e: any) =>
+    {
+        e.preventDefault();
+        
+        await fetch('http://localhost/api/user/signUp', {
+            method: 'POST',
+            body: JSON.stringify({
+                name: username,
+                email: email,
+                password: password
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                localStorage.setItem("user", JSON.stringify(data));
+                navigate('/landing'); 
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+
+    };
+    
 
     return (
         <div className={style.loginCard}>
@@ -29,7 +54,7 @@ export default function Login() {
                 ></img>
             </div>
 
-            <form className={style.loginForm} action="">
+            <form className={style.loginForm} onSubmit={onHandleSignUp}>
                 <div>
                     <h4>Sign Up</h4>
                 </div>
@@ -47,7 +72,7 @@ export default function Login() {
                 </label>
                 <input
                     type="email"
-                    onChange={(event) => setPassword(event.target.value)}
+                    onChange={(event) => setEmail(event.target.value)}
                     placeholder="Email"
                 />
                 <label className={style.loginLabel} htmlFor="password">
@@ -60,7 +85,7 @@ export default function Login() {
                 />
 
                 <div className={style.formButton}>
-                    <button type="submit" className={style.loginButton}>
+                    <button className={style.loginButton}>
                         Confirm
                     </button>
 
