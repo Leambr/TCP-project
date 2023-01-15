@@ -38,7 +38,7 @@ class GroupController extends Controller
     {
         $joinData = $request->validate([
 
-            'id' => ["required", "string"],
+            'id' => ["required", "int"],
             'password' => ["required", "string"]
         ]);
         $group = Group::where('password', $joinData['password'])->first();

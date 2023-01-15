@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import CardWrapper from '../../../design-system/component/CardWrapper/CardWrapper';
 import style from './Spending.module.css';
 import logo from '../../../design-system/icon/logo.svg';
@@ -27,159 +27,6 @@ interface SpentProps {
 }
 
 export default function Spending() {
-    const allSpendingData: SpendingProps[] = [
-        {
-            id: 1,
-            name: 'Les courses',
-        },
-        {
-            id: 2,
-            name: "L'essence",
-        },
-        {
-            id: 3,
-            name: "L'éléctricité",
-        },
-        {
-            id: 4,
-            name: 'Les soirées du jeudi soir',
-        },
-        {
-            id: 4,
-            name: 'Les soirées du jeudi soir',
-        },
-        {
-            id: 4,
-            name: 'Les soirées du jeudi soir',
-        },
-        {
-            id: 4,
-            name: 'Les soirées du jeudi soir',
-        },
-        {
-            id: 4,
-            name: 'Les soirées du jeudi soir',
-        },
-        {
-            id: 4,
-            name: 'Les soirées du jeudi soir',
-        },
-        {
-            id: 4,
-            name: 'Les soirées du jeudi soir',
-        },
-        {
-            id: 4,
-            name: 'Les soirées du jeudi soir',
-        },
-        {
-            id: 4,
-            name: 'Les soirées du jeudi soir',
-        },
-    ];
-    const spendingData: SpentProps[] = [
-        {
-            id: 1,
-            confirmed: true,
-            spending_id: 12435,
-            paidBy: 'Franck',
-            from: 'Franck',
-            to: 'Pauline',
-            amount: 16.98,
-        },
-
-        {
-            id: 1,
-            confirmed: true,
-            spending_id: 3254,
-            paidBy: 'Franck',
-            from: 'Franck',
-            to: 'Pauline',
-            amount: 16.98,
-        },
-        {
-            id: 1,
-            confirmed: true,
-            spending_id: 234,
-            paidBy: 'Franck',
-            from: 'Franck',
-            to: 'Pauline',
-            amount: 16.98,
-        },
-        {
-            id: 1,
-            confirmed: true,
-            spending_id: 23454,
-            paidBy: 'Franck',
-            from: 'Franck',
-            to: 'Pauline',
-            amount: 16.98,
-        },
-        {
-            id: 1,
-            confirmed: false,
-            spending_id: 42343,
-            paidBy: 'Franck',
-            from: 'Franck',
-            to: 'Pauline',
-            amount: 16.98,
-        },
-        {
-            id: 1,
-            confirmed: true,
-            spending_id: 5432562,
-            paidBy: 'Franck',
-            from: 'Franck',
-            to: 'Pauline',
-            amount: 16.98,
-        },
-        {
-            id: 2,
-            paidBy: 'Pierre',
-            spending_id: 1421,
-            confirmed: true,
-            from: 'Franck',
-            to: 'Pauline',
-            amount: 50.0,
-        },
-        {
-            id: 3,
-            confirmed: false,
-            spending_id: 12535,
-            paidBy: 'Paul',
-            from: 'Franck',
-            to: 'Pauline',
-            amount: 43.27,
-        },
-        {
-            id: 4,
-            confirmed: true,
-            spending_id: 14353,
-            paidBy: 'Camille',
-            from: 'Franck',
-            to: 'Pauline',
-            amount: 98.74,
-        },
-    ];
-
-    const [userList, setUserList] = useState([
-        {
-            id: 1,
-            name: 'Franck',
-        },
-        {
-            id: 2,
-            name: 'Pauline',
-        },
-        {
-            id: 3,
-            name: 'Pierre',
-        },
-        {
-            id: 4,
-            name: 'Paul',
-        },
-    ]);
 
     // Définition de useNaviagte
     const navigate = useNavigate();
@@ -195,20 +42,122 @@ export default function Spending() {
     const [confirmedTask, setConfirmedTask] = useState(confirmedSVG);
     const [searchParams, setSearchParams] = useSearchParams();
     const groupId = searchParams.get('groupId');
-    const [spendingDataId, setSpendingDataId] = useState(1);
-    const handleSpentData = () =>
-        spendingData.map(({ id, amount, paidBy, confirmed }) => {
-            if (spendingDataId == id) {
-                return (
-                    setAmountPaid(amount),
-                    setPaidBy(paidBy),
-                    confirmed
-                        ? setConfirmedTask(confirmedSVG)
-                        : setConfirmedTask(unconfirmedTaskSvg)
-                );
-            }
-        });
-    // console.log(allSpendingData);
+
+
+    const userJSON = localStorage.getItem("user");
+    const [user, setUser] = useState<any>();
+    const [id, setId] = useState();
+
+    useEffect(() => {
+        if(userJSON)
+        setUser(JSON.parse(userJSON))
+    }, [userJSON])
+
+    useEffect(() => {
+        if(user)
+        {
+            setId(user.id)
+        }
+    }, [user])
+
+
+    const [allSpendings, setAllSpendings] = useState<any[]>();
+    const  getAllSpendings = async () => {
+        await fetch(`http://localhost/api/group/${groupId}/spendings`, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data); 
+                setAllSpendings(data)
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+    }
+
+    useEffect( () => {
+        getAllSpendings();
+    }, [])
+
+    const handleSpendingOnClick = (id: string, name: string) =>
+    {
+        console.log(id);
+        
+        navigate(
+            '/spending/?groupId=' + groupId + '&id=' + id
+        );
+        setSpendingId(id)
+        getAllRefunds()
+    }
+
+    const [allRefunds, setAllRefunds] = useState<any[]>();
+    const [spendingId, setSpendingId] = useState<any>();
+    const  getAllRefunds = async () => {
+        if(spendingId)
+        {
+        await fetch(`http://localhost/api/spending/${spendingId}/refunds`, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data); 
+                setAllRefunds(data)
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+        }
+    }
+
+    useEffect( () => {
+        getAllRefunds();
+    }, [spendingId])
+
+
+    const spendingNameRef = useRef<any>(undefined);
+    const spendingAmountRef = useRef<any>(undefined);
+
+    const  createSpending = async (event: any) => {
+        event.preventDefault();
+
+
+        const spendingName = spendingNameRef.current.value;
+        const spendingAmount = spendingAmountRef.current.value;
+        if(spendingName)
+        {
+            
+            await fetch(`http://localhost/api/group/${groupId}/spending`, {
+            method: 'POST',
+            body: JSON.stringify({
+                name: spendingName,
+                amount: Number(spendingAmount),
+                paid_by_id: id
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data); 
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+        }
+        else{
+            alert('Pas de nom de groupe')
+        }
+        
+    }
+
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -220,16 +169,13 @@ export default function Spending() {
         setModalIsOpen(true);
     };
 
-    const test = () => {
-        console.log('test');
-    };
 
     return (
         <>
             <Navbar />
             <div className={style.spendingPage}>
                 <div className={style.spendingGroupTitle}>
-                    <h2>Trip to Marseille</h2>
+                    <h2>null</h2>
                 </div>
                 <div className={style.spendingPageContent}>
                     <div className={style.allSpendingData}>
@@ -248,19 +194,13 @@ export default function Spending() {
                             </button>
                         </div>
                         <div className={style.allSpendingDataSection}>
-                            {allSpendingData ? (
-                                allSpendingData.map(({ id, name }) => (
+                            {allSpendings ? (
+                                allSpendings.map(({ id, name }) => (
                                     <CardWrapper>
                                         <button
                                             value={id}
-                                            onClick={() => {
-                                                navigate(
-                                                    '/spending/?groupId=' + groupId + '&id=' + id
-                                                );
-                                                setSpendingDataId(id);
-                                                setSpendingTitle(name);
-                                                handleSpentData();
-                                            }}
+                                            onClick={() => handleSpendingOnClick(id, name)}
+                                            
                                         >
                                             {name}
                                         </button>
@@ -272,36 +212,15 @@ export default function Spending() {
                         </div>
                     </div>
 
-                    <div className={style.spendingData}>
-                        <div className={style.spendingAndAmount}>
-                            <div className={style.totalAmount}>
-                                <CardWrapper>
-                                    <div className={style.totalAmountContentCard}>
-                                        <p>My total Amount</p>
-                                        <span>50,00 €</span>
-                                    </div>
-                                </CardWrapper>
-                            </div>
-                            <div className={style.totalSpending}>
-                                <CardWrapper>
-                                    <div className={style.totalSpendingContentCard}>
-                                        <p>Total Spendings</p>
-                                        <span>50,00 €</span>
-                                    </div>
-                                </CardWrapper>
-                            </div>
-                        </div>
-
                         <div className={style.cardSpendingTask}>
                             <div className={style.spendingTaskHeader}>
                                 <h3>{spendingTitle}</h3>
                                 <p>
-                                    Paid By {paidBy} : {amountPaid} €
+                                    Paid By {allRefunds? allRefunds[0].to : null}
                                 </p>
                             </div>
                             <div>
-                                {spendingData.map(({ id, amount, to, from, spending_id }) => {
-                                    if (spendingDataId == id) {
+                                {allRefunds? allRefunds.map(({ id, amount, to, from, spending_id }) => {
                                         return (
                                             console.log(confirmedTask),
                                             (
@@ -330,8 +249,6 @@ export default function Spending() {
                                                                         '&taskId=' +
                                                                         spending_id
                                                                 );
-                                                                setSpendingDataId(id);
-                                                                console.log(spending_id);
                                                             }}
                                                         >
                                                             <img
@@ -343,8 +260,8 @@ export default function Spending() {
                                                 </CardWrapper>
                                             )
                                         );
-                                    }
-                                })}
+                                    
+                                }) : <></>}
                             </div>
                         </div>
                     </div>
@@ -357,33 +274,26 @@ export default function Spending() {
                         </div>
 
                         <div className={style.modalFormContainer}>
-                            <form className={style.modalForm}>
+                            <form className={style.modalForm} onSubmit={createSpending}>
                                 <input
                                     type="text"
                                     // id="spending"
                                     name="spendingName"
                                     placeholder="name"
+                                    ref={spendingNameRef}
                                 />
                                 <input
                                     type="text"
                                     // id="spending"
                                     name="spendingAmount"
                                     placeholder="amount"
+                                    ref={spendingAmountRef}
                                 />
-                                <select name="spendingPaidBy">
-                                    <option value="" selected disabled hidden>
-                                        paid by
-                                    </option>
-                                    {userList.map(({ id, name }) => (
-                                        <option value={id}>{name}</option>
-                                    ))}
-                                </select>
                                 <button type="submit">Let's go</button>
                             </form>
                         </div>
                     </Modal>
                 )}
-            </div>
         </>
     );
 }
